@@ -110,13 +110,46 @@ AI 可能马上给你方案，但：
 
 ## 安装
 
-### Codex 用户
-复制 `skills/intent-clarification-codex.md` 和 `skills/causal-factor-analysis-codex.md` 到你的 Codex 技能文件夹。
+### 第 1 步：复制 Skill 文件
 
-### Harness 用户
-复制 `skills/intent-clarification-harness.md` 和 `skills/causal-factor-analysis-harness.md` 到你的 Harness 技能文件夹。
+**Codex 用户：**
+```bash
+复制 skills/intent-clarification-codex.md 和 skills/causal-factor-analysis-codex.md 
+到你的 Codex 技能文件夹
+```
+
+**Harness 用户：**
+```bash
+复制 skills/intent-clarification-harness.md 和 skills/causal-factor-analysis-harness.md 
+到你的 Harness 技能文件夹
+```
 
 两个版本功能完全一样，只是格式不同（YAML frontmatter vs markdown 标题）。
+
+### 第 2 步：启用自动触发（推荐）
+
+**不想每次都手动说 `skill("intent-clarification")`？**
+
+在你的工作目录创建或更新 `WORKSPACE_INSTRUCTIONS.md`：
+
+```bash
+# 复制模板到你的工作目录
+cp templates/WORKSPACE_INSTRUCTIONS.md /你的工作目录/
+```
+
+或直接从 [templates/WORKSPACE_INSTRUCTIONS.md](templates/WORKSPACE_INSTRUCTIONS.md) 复制内容。
+
+**工作原理：**
+- Harness 在每次对话开始时自动读取 `WORKSPACE_INSTRUCTIONS.md`
+- AI 会根据里面的规则判断是否需要调用 skill
+- **立即生效**，不需要重启或重新构建
+
+**效果：**
+- ✅ 你说"我想做个任务管理 skill" → AI 自动调用 `intent-clarification`
+- ✅ AI 列出 2-4 种可能理解，问你确认
+- ✅ 确认后再继续执行
+
+详细配置见 [Harness 集成指南](docs/harness-integration.md)。
 
 ---
 
