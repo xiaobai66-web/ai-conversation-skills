@@ -1,6 +1,6 @@
 # Harness 集成指南
 
-本文档说明如何在 DeepSeek Harness 中启用这两个 skill 的自动触发。
+本文档说明如何在 DeepSeek Harness 中安装和使用这两个 skill。
 
 ---
 
@@ -10,147 +10,116 @@
 
 ---
 
-## ⭐ 推荐方案：使用 WORKSPACE_INSTRUCTIONS.md
+## 📦 安装方式
 
-**最简单、最灵活的方式**——不需要修改 Harness 源码，不需要重新构建，**立即生效**。
+### 桌面版 Harness（推荐）
 
-### 步骤
+**这是大多数用户使用的版本**——通过桌面应用程序运行的 Harness。
 
-1. **复制模板文件到你的工作目录：**
+#### 1. 确认 Skill 扫描目录
+
+桌面版 Harness 会扫描以下目录：
 
 ```bash
-cp templates/WORKSPACE_INSTRUCTIONS.md /你的工作目录/
+C:\Users\<你的用户名>\.dsh\skills\
 ```
 
-或直接从 [templates/WORKSPACE_INSTRUCTIONS.md](../templates/WORKSPACE_INSTRUCTIONS.md) 复制内容。
+#### 2. 创建目录结构
 
-2. **完成！**
+**重要：** 桌面版需要 **目录格式**（`skill名称/SKILL.md`），不是单个 `.md` 文件。
 
-Harness 会在每次对话开始时自动读取这个文件，AI 会根据里面的规则判断是否需要调用 skill。
+```bash
+C:\Users\<你的用户名>\.dsh\skills\
+├── intent-clarification\
+│   └── SKILL.md
+└── causal-factor-analysis\
+    └── SKILL.md
+```
 
-### 工作原理
+#### 3. 复制文件
 
-- ✅ Harness 启动新对话时自动读取 `WORKSPACE_INSTRUCTIONS.md`
-- ✅ AI 将文件内容作为工作区全局规则
-- ✅ AI 根据触发条件自动调用对应的 skill
-- ✅ 修改文件后，下次对话立即生效
+- 复制 `skills/intent-clarification-codex.md` → `C:\Users\<你的用户名>\.dsh\skills\intent-clarification\SKILL.md`
+- 复制 `skills/causal-factor-analysis-codex.md` → `C:\Users\<你的用户名>\.dsh\skills\causal-factor-analysis\SKILL.md`
 
-### 优点
+**为什么用 codex 版本？** 因为桌面版需要 YAML frontmatter 格式，codex 版本正好是这个格式。
 
-- 🚀 **零配置**：不需要修改 Harness 源码
-- 🔥 **即时生效**：修改后立即应用于新对话
-- 🎯 **灵活调整**：随时修改触发条件
-- 📁 **项目隔离**：每个项目可以有自己的规则
+#### 4. 验证安装
+
+在 Harness 中开启新对话，检查系统提示词（System Prompt）中是否包含：
+
+```
+<available_skills>
+- intent-clarification: ...
+- causal-factor-analysis: ...
+</available_skills>
+```
+
+看到这两个 skill 名称即表示安装成功。
 
 ---
 
-## 备选方案：修改 Harness 系统提示词
+### 网页版 Harness（源码开发）
 
-**仅当你需要全局生效（所有工作目录）时使用此方案。**
+**仅用于开发者从源码运行 Harness 时使用。**
 
-⚠️ **注意：** 这种方式需要修改源码并重新构建 Harness，比较复杂。推荐使用上面的 WORKSPACE_INSTRUCTIONS.md 方案。
+#### 1. 复制文件
 
-### 📝 修改步骤
+复制 `skills/intent-clarification-harness.md` 和 `skills/causal-factor-analysis-harness.md` 到你的 Harness 源码的 `skills/` 目录。
 
-### 1. 找到系统提示词文件
+#### 2. 格式说明
 
-文件位置：
-```
-D:\Agent兄弟会\harness\packages\core\system-prompt\src\index.ts
-```
-
-### 2. 添加自动触发逻辑
-
-在 `harness:independent-judgment` section 之后（约在 394 行），添加以下代码：
-
-```typescript
-// Skill auto-triggering logic
-this.section({
-  name: 'harness:skill-triggers',
-  order: -98,
-  text: `## Skill Auto-Triggering
-
-When user input matches the following patterns, load the corresponding skill BEFORE answering:
-
-### intent-clarification
-Load this skill when the user's request is ambiguous or has multiple valid interpretations:
-
-**Trigger conditions:**
-- Vague goals: "I want to do something" / "I'm thinking about..." / "I need to..."
-- Needs decomposition: "don't know how to..." / "not sure where to start..." / "need help figuring out..."
-- Multiple reasonable interpretations: the same input could mean 3+ different things
-- High-risk decisions: involves money, legal, health, career, business, or long-term commitments
-- Cross-domain: user explicitly states unfamiliarity with the domain
-
-**Do NOT trigger for:**
-- Simple factual questions: "What time is it?" / "How do I read a file in Python?"
-- Clear execution requests: "Write a function for me" / "Fix this bug"
-- Chat acknowledgments: "OK" / "Continue" / "Thanks"
-
-**Gray area (judge by context):**
-- "I want to learn X": trigger if complete beginner, simplify if experienced
-- "Help me evaluate this idea": trigger (needs goal clarification)
-- "How to do this project": trigger if complex, don't trigger for small features
-
-**How to use:**
-When triggered, call \`skill("intent-clarification")\` first, then follow its workflow to clarify the user's actual intent before proceeding.
-
-### causal-factor-analysis
-Load this skill when the goal is clear but needs deep analysis of decisive factors:
-
-**Trigger conditions:**
-- Goal is confirmed but user needs to understand "why" and "how"
-- Unfamiliar domain requiring causal understanding
-- Major decision requiring clear factor breakdown
-- Need to evaluate multiple options with tradeoff analysis
-- User asks "what do I need to pay attention to" / "what are the key factors"
-
-**How to use:**
-After intent is clarified (either by intent-clarification skill or already clear), call \`skill("causal-factor-analysis")\` to identify and decompose decisive factors.
-
-**Workflow coordination:**
-1. If user input is ambiguous → use intent-clarification first
-2. Once intent is clear → use causal-factor-analysis for deep breakdown
-3. Finally → proceed to execution/research/planning based on the analysis
-
-**Example:**
-User: "I want to make a task management skill"
-→ This is vague (what kind of task management? reminders? handoff? logs?)
-→ Load intent-clarification first
-→ After clarifying: they want conversation handoff to prevent drift
-→ Load causal-factor-analysis to break down key factors
-→ Then proceed with implementation`,
-})
-```
-
-### 3. 重新构建 Harness
-
-在 Harness 根目录执行：
-
-```powershell
-cd D:\Agent兄弟会\harness
-pnpm run build
-```
-
-或使用完整路径：
-
-```powershell
-& "C:\Users\ASUS\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\node\bin\node.exe" `
-  "C:\Users\ASUS\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\pnpm\bin\pnpm.mjs" `
-  run build
-```
-
-### 4. 重启 Harness
-
-构建完成后，重启 DeepSeek Harness 让修改生效。
+网页版使用 markdown 标题格式（无 YAML frontmatter）。
 
 ---
 
-## ✅ 验证
+## ⚙️ 自动触发机制
 
-修改生效后，测试以下场景：
+### 桌面版如何工作
 
-### 测试 1: intent-clarification 自动触发
+一旦 skill 正确安装到 `C:\Users\<你的用户名>\.dsh\skills\`，Harness 会：
+
+1. ✅ 在系统提示词中包含 skill 列表
+2. ✅ AI 根据 skill 内部定义的触发条件判断是否调用
+3. ✅ 符合条件时自动加载对应的 skill
+
+**无需额外配置**——skill 的触发逻辑已经内置在 skill 文件本身。
+
+### 触发条件示例
+
+**intent-clarification 会在以下情况触发：**
+- 用户说话模糊（"我想做个..."）
+- 有多种合理理解（3+ 种）
+- 涉及高风险决策（金钱、法律、健康）
+- 跨领域探索（用户明确说不懂）
+
+**causal-factor-analysis 会在以下情况触发：**
+- 目标已明确但需要理解"为什么"
+- 陌生领域需要因果分析
+- 重大决策需要清晰的因素分解
+- 需要评估多个选项的权衡
+
+---
+
+## 🧪 验证安装
+
+### 测试 1: 检查 Skill 是否被加载
+
+在 Harness 中开启新对话，查看系统提示词（System Prompt）。
+
+**期望结果：**
+```
+<available_skills>
+- intent-clarification: 在 AI 回答或执行前，从用户的一句模糊表达中识别多种可能的意图...
+- causal-factor-analysis: 当目标明确后，识别所有"决定性因素"...
+</available_skills>
+```
+
+✅ 看到这两个 skill → 安装成功  
+❌ 没有看到 → 检查目录结构和文件名是否正确
+
+---
+
+### 测试 2: intent-clarification 自动触发
 
 **输入：**
 ```
@@ -158,11 +127,13 @@ pnpm run build
 ```
 
 **期望行为：**
-- AI 先调用 `skill("intent-clarification")`
-- 列出 2-4 种可能的理解（任务提醒？对话交接？任务日志？）
-- 问一个关键问题确认方向
+- AI 先分析这个请求的多种可能理解
+- 列出 2-4 种候选方向（任务提醒？对话交接？任务日志？依赖管理？）
+- 问一个关键问题确认你的真实意图
 
-### 测试 2: causal-factor-analysis 自动触发
+---
+
+### 测试 3: causal-factor-analysis 触发
 
 **输入：**
 ```
@@ -171,11 +142,12 @@ pnpm run build
 
 **期望行为：**
 - AI 识别出需要深度分析
-- 调用 `skill("causal-factor-analysis")`
-- 列出决定性因素（市场需求、课程质量、营销能力...）
-- 深度解释每个因素的因果关系
+- 列出决定性因素（市场需求、课程质量、营销能力、定价策略...）
+- 深度解释每个因素的因果关系（什么、为什么重要、如何影响、何时成立/不成立）
 
-### 测试 3: 不应该触发
+---
+
+### 测试 4: 不应该触发
 
 **输入：**
 ```
@@ -190,37 +162,112 @@ pnpm run build
 
 ## 🔧 故障排查
 
-### 问题：构建失败
+### 问题 1: Skill 没有出现在 available_skills 列表
 
-**可能原因：** pnpm 命令未找到
+**可能原因：**
+- 目录结构不对（必须是 `skill名称/SKILL.md` 格式）
+- 文件名不对（必须是 `SKILL.md`，大小写敏感）
+- 放错位置（必须在 `C:\Users\<你的用户名>\.dsh\skills\`）
 
-**解决方案：** 使用完整路径（见步骤 3）
+**解决方案：**
+1. 检查完整路径：
+   ```
+   C:\Users\<你的用户名>\.dsh\skills\intent-clarification\SKILL.md
+   C:\Users\<你的用户名>\.dsh\skills\causal-factor-analysis\SKILL.md
+   ```
 
-### 问题：修改后没有生效
+2. 确认文件不是空的（至少有 YAML frontmatter）
 
-**检查清单：**
-1. ✅ 确认 `index.ts` 文件已保存
-2. ✅ 确认构建成功完成（无错误）
-3. ✅ 确认已重启 Harness
-4. ✅ 确认 skill 文件已正确安装在 `D:\Agent兄弟会\harness\skills\`
+3. 重启 Harness
 
-### 问题：AI 过度触发 skill
+---
 
-**调整方案：**
+### 问题 2: Skill 已加载但不自动触发
 
-修改 `order` 值（数字越小优先级越高）：
-- 当前：`order: -98`
-- 降低优先级：改为 `order: -90` 或更大的值
+**可能原因：**
+- 你的输入不符合触发条件
+- Skill 内部的触发逻辑需要调整
 
-或在触发条件里添加更严格的限制。
+**临时解决方案：**
+手动调用 skill：
+```
+skill("intent-clarification")
+```
+
+**检查方法：**
+- 查看 skill 文件中的触发条件说明
+- 尝试更明显的模糊输入（如"我想做点什么但不知道从哪开始"）
+
+---
+
+### 问题 3: AI 说"skill 不存在"
+
+**可能原因：**
+- Skill 没有正确加载
+- 文件格式错误（YAML frontmatter 格式不对）
+
+**解决方案：**
+1. 检查 YAML frontmatter 是否完整：
+   ```yaml
+   ---
+   name: intent-clarification
+   description: ...
+   ---
+   ```
+
+2. 确认文件编码是 UTF-8
+
+3. 检查是否有语法错误（YAML 对缩进敏感）
+
+---
+
+## 📊 桌面版 vs 网页版对比
+
+| 特性 | 桌面版 Harness | 网页版 Harness（源码） |
+|------|---------------|----------------------|
+| **安装位置** | `C:\Users\<用户名>\.dsh\skills\` | `<源码根目录>\skills\` |
+| **目录格式** | `skill名称/SKILL.md` | 单个 `.md` 文件 |
+| **文件格式** | YAML frontmatter | markdown 标题 |
+| **使用文件** | `*-codex.md` 版本 | `*-harness.md` 版本 |
+| **重启需求** | 是（修改后需重启） | 否（HMR 热更新） |
+| **适用人群** | 所有用户 | 开发者 |
+
+---
+
+## 💡 使用技巧
+
+### 手动触发
+
+即使 skill 会自动触发，你也可以随时手动调用：
+
+```
+skill("intent-clarification")
+skill("causal-factor-analysis")
+```
+
+### 跳过 Skill
+
+如果你确定不需要 skill 介入，可以在请求中明确说明：
+
+```
+直接帮我写代码，不要调用 skill
+```
+
+### 调整触发条件
+
+如果你觉得 skill 触发太频繁或太少，可以：
+
+1. 编辑 `SKILL.md` 文件中的触发条件说明
+2. 重启 Harness 让修改生效
 
 ---
 
 ## 📚 相关文档
 
-- [意图澄清 Skill 文档](../skills/intent-clarification-harness.md)
-- [因果分析 Skill 文档](../skills/causal-factor-analysis-harness.md)
-- [Harness 系统提示词文档](https://github.com/deepseek-ai/dsh)
+- [意图澄清 Skill 文档](../skills/intent-clarification-codex.md)
+- [因果分析 Skill 文档](../skills/causal-factor-analysis-codex.md)
+- [设计原理](design-rationale.md)
+- [对比分析](comparison.md)
 
 ---
 
@@ -228,11 +275,13 @@ pnpm run build
 
 如果遇到问题，可以：
 
-1. 检查 Harness 日志（通常在 `~/.dsh/logs/`）
-2. 在 GitHub 仓库提 Issue
-3. 临时禁用自动触发：注释掉 `harness:skill-triggers` section
+1. 检查 Harness 日志（通常在 `C:\Users\<你的用户名>\.dsh\logs\`）
+2. 在 GitHub 仓库提 Issue：https://github.com/xiaobai66-web/ai-intent-skills/issues
+3. 查看完整的安装案例：[examples/](../examples/)
 
 ---
 
-**更新日期：** 2026-10-08  
-**兼容版本：** DeepSeek Harness ≥ 0.1.1-rc.1
+**更新日期：** 2026-10-09  
+**兼容版本：** DeepSeek Harness 桌面版（测试环境）
+
+

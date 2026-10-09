@@ -110,46 +110,55 @@ Causal Factor Analysis:
 
 ## Installation
 
-### Step 1: Copy Skill Files
+### For Codex Users
 
-**For Codex:**
-```bash
-Copy skills/intent-clarification-codex.md and skills/causal-factor-analysis-codex.md 
-to your Codex skills folder
-```
+Copy `skills/intent-clarification-codex.md` and `skills/causal-factor-analysis-codex.md` to your Codex skills folder.
 
-**For Harness:**
-```bash
-Copy skills/intent-clarification-harness.md and skills/causal-factor-analysis-harness.md 
-to your Harness skills folder
-```
+Format: YAML frontmatter + markdown
 
-Both versions have identical functionality, just different formats (YAML frontmatter vs. markdown heading).
+---
 
-### Step 2: Enable Auto-Triggering (Recommended)
+### For Harness Users
 
-**Don't want to manually say `skill("intent-clarification")` every time?**
+#### Desktop Harness (Recommended)
 
-Create or update `WORKSPACE_INSTRUCTIONS.md` in your working directory:
+1. **Create skill directory structure:**
 
 ```bash
-# Copy the template to your working directory
-cp templates/WORKSPACE_INSTRUCTIONS.md /your/working/directory/
+C:\Users\<YourUsername>\.dsh\skills\
+├── intent-clarification\
+│   └── SKILL.md
+└── causal-factor-analysis\
+    └── SKILL.md
 ```
 
-Or copy the content directly from [templates/WORKSPACE_INSTRUCTIONS.md](templates/WORKSPACE_INSTRUCTIONS.md).
+2. **Copy files:**
+   - Copy `skills/intent-clarification-codex.md` → `C:\Users\<YourUsername>\.dsh\skills\intent-clarification\SKILL.md`
+   - Copy `skills/causal-factor-analysis-codex.md` → `C:\Users\<YourUsername>\.dsh\skills\causal-factor-analysis\SKILL.md`
 
-**How it works:**
-- Harness automatically reads `WORKSPACE_INSTRUCTIONS.md` at the start of each conversation
-- AI judges whether to call skills based on the rules inside
-- **Takes effect immediately**, no restart or rebuild needed
+3. **Verify:**
+   - In a new Harness conversation, the system prompt should include an `<available_skills>` list
+   - Both skill names should appear → installation successful
 
-**What you get:**
-- ✅ You say "I want to make a task management skill" → AI auto-calls `intent-clarification`
-- ✅ AI lists 2-4 possible interpretations, asks you to confirm
-- ✅ Continues execution only after confirmation
+**Note:** Desktop version requires **directory format** (`skill-name/SKILL.md`), not single `.md` files.
 
-See the [Harness Integration Guide](docs/harness-integration.md) for detailed configuration.
+#### Web Harness (Source Development)
+
+Copy `skills/intent-clarification-harness.md` and `skills/causal-factor-analysis-harness.md` to your Harness source code `skills/` directory.
+
+Format: markdown heading (no YAML frontmatter)
+
+---
+
+### How to Use
+
+Once installed, when you say something matching the trigger conditions (e.g., "I want to make a task management skill"), AI will automatically load the corresponding skill.
+
+You can also manually invoke:
+```
+skill("intent-clarification")
+skill("causal-factor-analysis")
+```
 
 ---
 

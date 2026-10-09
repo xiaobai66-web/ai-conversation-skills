@@ -110,46 +110,55 @@ AI 可能马上给你方案，但：
 
 ## 安装
 
-### 第 1 步：复制 Skill 文件
+### Codex 用户
 
-**Codex 用户：**
-```bash
-复制 skills/intent-clarification-codex.md 和 skills/causal-factor-analysis-codex.md 
-到你的 Codex 技能文件夹
-```
+复制 `skills/intent-clarification-codex.md` 和 `skills/causal-factor-analysis-codex.md` 到你的 Codex 技能文件夹。
 
-**Harness 用户：**
-```bash
-复制 skills/intent-clarification-harness.md 和 skills/causal-factor-analysis-harness.md 
-到你的 Harness 技能文件夹
-```
+格式：YAML frontmatter + markdown
 
-两个版本功能完全一样，只是格式不同（YAML frontmatter vs markdown 标题）。
+---
 
-### 第 2 步：启用自动触发（推荐）
+### Harness 用户
 
-**不想每次都手动说 `skill("intent-clarification")`？**
+#### 桌面版 Harness（推荐）
 
-在你的工作目录创建或更新 `WORKSPACE_INSTRUCTIONS.md`：
+1. **创建 skill 目录结构：**
 
 ```bash
-# 复制模板到你的工作目录
-cp templates/WORKSPACE_INSTRUCTIONS.md /你的工作目录/
+C:\Users\<你的用户名>\.dsh\skills\
+├── intent-clarification\
+│   └── SKILL.md
+└── causal-factor-analysis\
+    └── SKILL.md
 ```
 
-或直接从 [templates/WORKSPACE_INSTRUCTIONS.md](templates/WORKSPACE_INSTRUCTIONS.md) 复制内容。
+2. **复制文件：**
+   - 复制 `skills/intent-clarification-codex.md` → `C:\Users\<你的用户名>\.dsh\skills\intent-clarification\SKILL.md`
+   - 复制 `skills/causal-factor-analysis-codex.md` → `C:\Users\<你的用户名>\.dsh\skills\causal-factor-analysis\SKILL.md`
 
-**工作原理：**
-- Harness 在每次对话开始时自动读取 `WORKSPACE_INSTRUCTIONS.md`
-- AI 会根据里面的规则判断是否需要调用 skill
-- **立即生效**，不需要重启或重新构建
+3. **验证：**
+   - 在 Harness 新对话中，系统提示词应包含 `<available_skills>` 列表
+   - 看到两个 skill 名称即表示安装成功
 
-**效果：**
-- ✅ 你说"我想做个任务管理 skill" → AI 自动调用 `intent-clarification`
-- ✅ AI 列出 2-4 种可能理解，问你确认
-- ✅ 确认后再继续执行
+**注意：** 桌面版需要 **目录格式**（`skill名称/SKILL.md`），不是单个 `.md` 文件。
 
-详细配置见 [Harness 集成指南](docs/harness-integration.md)。
+#### 网页版 Harness（源码开发）
+
+复制 `skills/intent-clarification-harness.md` 和 `skills/causal-factor-analysis-harness.md` 到 Harness 源码的 `skills/` 目录。
+
+格式：markdown 标题（无 YAML frontmatter）
+
+---
+
+### 如何使用
+
+安装完成后，当你说出符合触发条件的话时（如"我想做个任务管理 skill"），AI 会自动加载对应的 skill。
+
+你也可以手动调用：
+```
+skill("intent-clarification")
+skill("causal-factor-analysis")
+```
 
 ---
 
