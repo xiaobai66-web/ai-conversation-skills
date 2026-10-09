@@ -145,9 +145,9 @@ Copy files to `C:\Users\<YourUsername>\.dsh\skills\`, directory format:
 
 ## ✅ Real Testing
 
-**Stock Investment:** "I want to learn how to buy stocks from scratch" → One conversation from vague idea to clear path (9.0/10)
+**Stock Investment:** "I want to learn how to buy stocks from scratch" → One conversation from vague idea to clear path
 
-**Agent Configuration:** "I'm seeing agent tutorials everywhere, feeling like I need to standardize my usage" → User went from "completely don't understand" to full understanding (9.66/10)
+**Agent Configuration:** "I'm seeing agent tutorials everywhere, feeling like I need to standardize my usage" → User went from "completely don't understand" to full understanding
 
 [See full examples →](examples/)
 
