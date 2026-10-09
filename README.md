@@ -1,27 +1,21 @@
 # AI Intent Skills
 
-**Two skills that help AI understand what users actually want before acting.**
-
-Stop AI from guessing wrong and wasting your time.
+Two skills that help AI understand what you actually want before acting.
 
 ---
 
-## The Problem
+## What Problem Does This Solve
 
-You say **"I want to buy stocks"**
-
-AI might think you mean:
-- Teach me the basics (learning)
-- Recommend specific stocks (execution)
-- Help me open an account (setup)
-- Judge if now is a good time (consultation)
-- Analyze if this idea makes sense (validation)
+You say **"I want to buy stocks"**. AI might think you mean:
+- Teach me the basics
+- Recommend specific stocks
+- Help me open an account
+- Judge if now is a good time
+- Analyze if this idea makes sense
 
 **If AI picks wrong, the whole conversation goes sideways.**
 
-You say **"I want to do AI e-commerce"**
-
-AI might give you a plan immediately, but:
+You say **"I want to do AI e-commerce"**. AI might give you a plan immediately, but:
 - Doesn't explain *why* certain directions work
 - Doesn't tell you *when* the advice breaks down
 - Doesn't distinguish facts from guesses
@@ -31,12 +25,10 @@ AI might give you a plan immediately, but:
 
 ---
 
-## The Solution
+## Two Skills
 
-Two separate skills that work together:
-
-### 1. Intent Clarification
-**What it does:** Figures out what you actually want before answering.
+### Intent Clarification
+Figures out what you actually want before answering.
 
 - Lists 2-4 possible interpretations of your words
 - Shows you the evidence for each
@@ -45,10 +37,10 @@ Two separate skills that work together:
 
 **Use it when:** Your request is vague, has multiple meanings, or involves high-risk decisions.
 
-[Read the skill →](skills/intent-clarification-harness.md)
+[Read the skill →](skills/intent-clarification-codex.md)
 
-### 2. Causal Factor Analysis
-**What it does:** Breaks down "what determines success" with deep explanations.
+### Causal Factor Analysis
+Breaks down "what determines success" with deep explanations.
 
 - Identifies decisive factors (things that actually change outcomes)
 - Explains the *why* and *how*, not just *what*
@@ -59,7 +51,21 @@ Two separate skills that work together:
 
 **Use it when:** Goal is clear but you don't understand the domain, need to evaluate viability, or make business decisions.
 
-[Read the skill →](skills/causal-factor-analysis-harness.md)
+[Read the skill →](skills/causal-factor-analysis-codex.md)
+
+---
+
+## Why Two Skills
+
+**Different jobs, different triggers.**
+
+| Intent Clarification | Causal Factor Analysis |
+|---------------------|------------------------|
+| Trigger: Vague or ambiguous input | Trigger: Clear goal but unfamiliar domain |
+| Output: Confirmed provisional goal | Output: Deep causal breakdown + validation plan |
+| Depth: Just enough to get direction right | Depth: Full explanation of decisive factors |
+
+Combining them made each half-baked. Separating lets each do its job properly.
 
 ---
 
@@ -88,43 +94,15 @@ Causal Factor Analysis:
 
 ---
 
-## Real Examples
-
-### Stock Investment
-- **Input:** "I want to learn how to buy stocks from scratch"
-- **Intent Clarification:** Listed 4 interpretations, confirmed user wants to learn *and* actually buy
-- **Causal Factor Analysis:** Broke down market selection, risk tolerance, account setup with full causality
-- **Outcome:** User went from vague idea to clear path in one conversation
-- **Score:** 9.0/10 (some drift during explanation phase)
-
-### Agent Configuration
-- **Input:** "I'm seeing agent tutorials everywhere, feeling like I need to standardize my usage"
-- **Intent Clarification:** Listed 4 possibilities (learn methods, fix pain points, build system, evaluate ROI)
-- **Causal Factor Analysis:** Deep dive into agent mechanics, work folder design, handoff skills, maintenance cost
-- **Outcome:** User went from "completely don't understand" to full understanding in one conversation
-- **Score:** 9.66/10
-
-[See full examples →](examples/)
-
----
-
 ## Installation
 
-### For Codex Users
-
+### Codex
 Copy `skills/intent-clarification-codex.md` and `skills/causal-factor-analysis-codex.md` to your Codex skills folder.
 
-Format: YAML frontmatter + markdown
+### Harness (Desktop)
+Copy files to `C:\Users\<YourUsername>\.dsh\skills\`, directory format:
 
----
-
-### For Harness Users
-
-#### Desktop Harness (Recommended)
-
-1. **Create skill directory structure:**
-
-```bash
+```
 C:\Users\<YourUsername>\.dsh\skills\
 ├── intent-clarification\
 │   └── SKILL.md
@@ -132,64 +110,26 @@ C:\Users\<YourUsername>\.dsh\skills\
     └── SKILL.md
 ```
 
-2. **Copy files:**
-   - Copy `skills/intent-clarification-codex.md` → `C:\Users\<YourUsername>\.dsh\skills\intent-clarification\SKILL.md`
-   - Copy `skills/causal-factor-analysis-codex.md` → `C:\Users\<YourUsername>\.dsh\skills\causal-factor-analysis\SKILL.md`
-
-3. **Verify:**
-   - In a new Harness conversation, the system prompt should include an `<available_skills>` list
-   - Both skill names should appear → installation successful
-
-**Note:** Desktop version requires **directory format** (`skill-name/SKILL.md`), not single `.md` files.
-
-#### Web Harness (Source Development)
-
-Copy `skills/intent-clarification-harness.md` and `skills/causal-factor-analysis-harness.md` to your Harness source code `skills/` directory.
-
-Format: markdown heading (no YAML frontmatter)
-
----
-
-### How to Use
-
-Once installed, when you say something matching the trigger conditions (e.g., "I want to make a task management skill"), AI will automatically load the corresponding skill.
-
-You can also manually invoke:
+Once installed, AI will automatically load the corresponding skill based on your input. You can also manually invoke:
 ```
 skill("intent-clarification")
 skill("causal-factor-analysis")
 ```
 
----
-
-## Why Two Skills Instead of One?
-
-**Different jobs, different triggers:**
-
-**Intent Clarification:**
-- Triggers: User says something vague or ambiguous
-- Output: Confirmed provisional goal
-- Depth: Just enough to get direction right
-
-**Causal Factor Analysis:**
-- Triggers: Goal is clear but user doesn't understand the domain
-- Output: Deep causal breakdown + verification plan
-- Depth: Full explanation of decisive factors
-
-Combining them made each half-baked. Separating lets each do its job properly.
+See [Harness Integration Guide](docs/harness-integration.md) for details.
 
 ---
 
 ## What Makes This Different
 
-### vs. Just Asking Follow-up Questions
+**vs. Just Asking Follow-up Questions**  
 Most AI just asks more questions. These skills *show you* how AI is interpreting your words, so you can correct misunderstandings early.
 
-### vs. Standard Task Breakdown
+**vs. Standard Task Breakdown**  
 Standard breakdown gives you steps. This gives you *causality*: why each factor matters, how it affects outcomes, when it stops mattering.
 
-### vs. GitHub Projects (Rasa, PMAgent, TypeChat, etc.)
-We researched 6+ projects. None do the complete flow:
+**vs. Existing Tools (Rasa, PMAgent, TypeChat, etc.)**  
+Researched 6+ projects. None do the complete flow:
 - **Rasa:** Has candidate ranking + confidence, but doesn't let you choose
 - **PMAgent:** Has option-style questioning, closest match, but only for PM scenarios
 - **TypeChat:** Has structured confirmation, but no probability ranking
@@ -197,95 +137,30 @@ We researched 6+ projects. None do the complete flow:
 
 [See full comparison →](docs/comparison.md)
 
-**Our combination:**
-- Candidate ranking (from Rasa)
-- User choice (our innovation)
-- Causal explanation (our innovation)
-- Provisional goals (our innovation)
-- Reversal conditions (our innovation)
+**Our combination:** Candidate ranking (Rasa) + User choice + Causal explanation + Provisional goals + Reversal conditions
 
 ---
 
-## Design Philosophy
+## Real Testing
 
-**From real conversations, not theory.**
+**Stock Investment:** "I want to learn how to buy stocks from scratch" → Listed 4 interpretations → Confirmed user wants to learn *and* actually buy → Broke down market selection/risk tolerance/account setup → One conversation from vague idea to clear path (9.0/10)
 
-These skills came from 10 days of actual back-and-forth with Codex (Sept 30 - Oct 9, 2026), working through:
-- Stock investment scenario (revealed drift issues)
-- Agent configuration scenario (proved the approach works)
-- E-commerce direction evaluation (tested causal analysis depth)
+**Agent Configuration:** "I'm seeing agent tutorials everywhere, feeling like I need to standardize my usage" → Listed 4 possibilities → Deep dive into agent mechanics/work folder design/handoff skills → User went from "completely don't understand" to full understanding (9.66/10)
 
-Every principle came from real problems we hit.
-
-[Read the full design story →](docs/design-rationale.md)
+[See full examples →](examples/)
 
 ---
 
-## Roadmap
+## More
 
-**Current: MVP (v1.0)**
-- ✅ Intent clarification with 2-4 candidates
-- ✅ Causal factor deep decomposition
-- ✅ Facts/assumptions/unknowns distinction
-- ✅ Reversal conditions
-- ✅ Minimal validation plans
+**Design Philosophy:** From real conversations, not theory. Every principle came from real problems encountered. [Read the full design story →](docs/design-rationale.md)
 
-**Next: Enhancements (v1.1-1.2)**
-- [ ] Understanding check mechanism (ask user to rephrase)
-- [ ] Dynamic factor priority adjustment
-- [ ] Automatic GitHub precedent search
-- [ ] Richer examples library
+**Roadmap:** Current v1.0 (intent clarification + causal breakdown + fact/assumption distinction) → v1.1 (understanding check + dynamic priority) → v2.0 (visual causal graphs + drift pattern library)
 
-**Future: Polish (v2.0+)**
-- [ ] Visual causal graphs
-- [ ] Real usage data collection
-- [ ] Common drift pattern library
-- [ ] Multi-language support optimization
+**Contributing:** Found a case where the skills failed? Have a better example? Issues and PRs welcome.
+
+**License:** MIT - use it however you want.
 
 ---
 
-## Contributing
-
-Found a case where the skills failed? Have a better example? Want to add trigger patterns?
-
-Issues and PRs welcome. Please include:
-- The actual user input
-- What went wrong or could improve
-- Your suggested fix
-
----
-
-## License
-
-MIT License - use it however you want.
-
----
-
-## Citation
-
-If you use these skills in your research or product:
-
-```
-@software{ai_intent_skills_2026,
-  author = {xiaobai66-web},
-  title = {AI Intent Skills: Intent Clarification and Causal Factor Analysis},
-  year = {2026},
-  url = {https://github.com/xiaobai66-web/ai-intent-skills}
-}
-```
-
----
-
-## Credits
-
-Built through iterative conversation with Codex, based on real pain points encountered in:
-- Stock investment exploration
-- Agent configuration design
-- E-commerce direction validation
-- Business model evaluation
-
-Special thanks to the open-source projects we studied:
-- Rasa (candidate ranking approach)
-- PMAgent (option-style questioning)
-- TypeChat (structured confirmation)
-- UAP (uncertainty sampling)
+**GitHub:** https://github.com/xiaobai66-web/ai-intent-skills
