@@ -3,7 +3,7 @@
 > Two skills that help AI understand what you actually want before acting.
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](https://github.com/xiaobai66-web/ai-intent-skills)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/xiaobai66-web/ai-intent-skills)
 
 ---
 
@@ -34,7 +34,7 @@ You say **"I want to do AI e-commerce"**. AI might give you a plan immediately, 
 <tr>
 <td width="50%" valign="top">
 
-### 🎤 Intent Clarification
+### ✅ Intent Clarification
 
 Figures out what you actually want before answering.
 
@@ -52,7 +52,7 @@ Vague request, multiple meanings, high-risk decisions
 </td>
 <td width="50%" valign="top">
 
-### 🔍 Causal Factor Analysis
+### 🧩 Causal Factor Analysis
 
 Breaks down "what determines success" with deep explanations.
 
@@ -77,12 +77,10 @@ Clear goal but unfamiliar domain, need to evaluate viability
 
 ## 🤔 Why Two Skills
 
-**Different jobs, different triggers.**
+**Separating lets each do its job properly.**
 
 **Intent Clarification:** Vague input → Confirmed provisional goal → Just enough to get direction right  
 **Causal Factor Analysis:** Clear goal but unfamiliar domain → Deep causal breakdown + validation plan → Full explanation of decisive factors
-
-Combining them made each half-baked. Separating lets each do its job properly.
 
 ---
 

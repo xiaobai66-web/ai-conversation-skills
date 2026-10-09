@@ -3,7 +3,7 @@
 > 两个技能，让 AI 在行动前先搞清楚你想要什么。
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](https://github.com/xiaobai66-web/ai-intent-skills)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/xiaobai66-web/ai-intent-skills)
 
 ---
 
@@ -34,7 +34,7 @@
 <tr>
 <td width="50%" valign="top">
 
-### 🎤 意图澄清
+### ✅ 意图澄清
 
 回答前先搞清楚你到底想干什么。
 
@@ -52,7 +52,7 @@
 </td>
 <td width="50%" valign="top">
 
-### 🔍 因果分析
+### 🧩 因果分析
 
 拆解"什么决定成败"并深度解释。
 
@@ -77,12 +77,10 @@
 
 ## 🤔 为什么分成两个
 
-**不同的工作，不同的触发时机。**
+**分开后各自做好自己的事。**
 
 **意图澄清：** 用户说话模糊 → 确认暂定目标 → 刚好能确认方向  
 **因果分析：** 目标明确但不懂领域 → 深度因果拆解 + 验证方案 → 完整解释决定性因素
-
-合在一起会让两个都半生不熟。分开后各自做好自己的事。
 
 ---
 
