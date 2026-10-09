@@ -4,6 +4,10 @@
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/xiaobai66-web/ai-intent-skills)
+[![GitHub Stars](https://img.shields.io/github/stars/xiaobai66-web/ai-intent-skills?style=social)](https://github.com/xiaobai66-web/ai-intent-skills/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/xiaobai66-web/ai-intent-skills?style=social)](https://github.com/xiaobai66-web/ai-intent-skills/network/members)
+
+**Keywords:** AI Agent · Intent Recognition · Causal Analysis · Prompt Engineering · ChatGPT · Claude · LangChain · Conversational AI
 
 ---
 
