@@ -115,23 +115,22 @@ Causal Factor Analysis:
 
 ## 📦 Installation
 
-### 💻 Codex
-Copy `skills/intent-clarification-codex.md` and `skills/causal-factor-analysis-codex.md` to your Codex skills folder.
+### 💻 Claude Code (CLI / Desktop / IDE)
 
-### 🖥️ Harness (Desktop)
-Copy files to `C:\Users\<YourUsername>\.dsh\skills\`, directory format:
+Copy files to `.claude/skills/` — globally or per project:
 
 ```
-📁 C:\Users\<YourUsername>\.dsh\skills\
+# Global (works in all projects)
+C:\Users\<YourUsername>\.claude\skills\
 ├── 📁 intent-clarification\
-│   └── 📄 SKILL.md
+│   └── 📄 SKILL.md          ← copy from skills/intent-clarification-codex.md
 └── 📁 causal-factor-analysis\
-    └── 📄 SKILL.md
+    └── 📄 SKILL.md          ← copy from skills/causal-factor-analysis-codex.md
 ```
 
-**Usage:** Once installed, AI will automatically load the corresponding skill based on your input. You can also manually invoke `skill("intent-clarification")`
+**Usage:** Once installed, AI automatically loads the skill when input matches trigger conditions. You can also manually invoke `/intent-clarification` or `/causal-factor-analysis`.
 
-📖 See [Harness Integration Guide](docs/harness-integration.md) for details
+📖 See [Claude Code Integration Guide](docs/harness-integration.md) for details
 
 ---
 
@@ -149,11 +148,9 @@ Copy files to `C:\Users\<YourUsername>\.dsh\skills\`, directory format:
 
 ## ✅ Real Testing
 
-**Stock Investment:** "I want to learn how to buy stocks from scratch" → One conversation from vague idea to clear path
+**Stock Investment:** "I want to learn how to buy stocks from scratch" → One conversation from vague idea to clear path · [Full example →](examples/stock-investment.md)
 
-**Agent Configuration:** "I'm seeing agent tutorials everywhere, feeling like I need to standardize my usage" → User went from "completely don't understand" to full understanding
-
-[See full examples →](examples/)
+**Agent Configuration:** "I'm seeing agent tutorials everywhere, feeling like I need to standardize my usage" → User went from "completely don't understand" to full understanding · [Full example →](examples/agent-configuration.md)
 
 ---
 

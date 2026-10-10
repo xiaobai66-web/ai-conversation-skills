@@ -1,3 +1,8 @@
+---
+name: causal-factor-analysis
+description: When a goal is clear, identify all decisive factors (variables that meaningfully change outcomes) and deeply decompose each one's causal chain — what it is, why it matters, how it impacts the goal step by step, when it applies and when it doesn't. Labels facts, assumptions, and unknowns explicitly. Provides concrete examples and minimal validation plans. Triggers when the goal is confirmed but the user needs to understand why and how, especially in unfamiliar domains.
+---
+
 # Causal Factor Analysis
 
 When goals are clear, decompose "what factors determine success/failure" and explain the underlying causality.

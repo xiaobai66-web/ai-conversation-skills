@@ -115,23 +115,22 @@
 
 ## 📦 安装
 
-### 💻 Codex
-复制 `skills/intent-clarification-codex.md` 和 `skills/causal-factor-analysis-codex.md` 到你的 Codex 技能文件夹。
+### 💻 Claude Code（CLI / 桌面版 / IDE 插件）
 
-### 🖥️ Harness（桌面版）
-复制文件到 `C:\Users\<你的用户名>\.dsh\skills\`，目录格式：
+将文件复制到 `.claude/skills/` 目录，全局或项目级均可：
 
 ```
-📁 C:\Users\<你的用户名>\.dsh\skills\
+# 全局安装（所有项目可用）
+C:\Users\<你的用户名>\.claude\skills\
 ├── 📁 intent-clarification\
-│   └── 📄 SKILL.md
+│   └── 📄 SKILL.md          ← 复制自 skills/intent-clarification-codex.md
 └── 📁 causal-factor-analysis\
-    └── 📄 SKILL.md
+    └── 📄 SKILL.md          ← 复制自 skills/causal-factor-analysis-codex.md
 ```
 
-**使用：** 安装后，AI 会根据输入自动加载对应的 skill。你也可以手动调用 `skill("intent-clarification")`
+**使用方式：** 安装后，AI 会根据输入自动加载对应的 skill。也可以手动调用 `/intent-clarification` 或 `/causal-factor-analysis`。
 
-📖 详细安装说明见 [Harness 集成指南](docs/harness-integration.md)
+📖 详细安装说明见 [Claude Code 集成指南](docs/harness-integration.md)
 
 ---
 
@@ -149,11 +148,9 @@
 
 ## ✅ 真实测试
 
-**股票投资：** "我想从零学会怎么买股票" → 一次对话从模糊想法到清晰路径
+**股票投资：** "我想从零学会怎么买股票" → 一次对话从模糊想法到清晰路径 · [查看完整案例 →](examples/stock-investment.md)
 
-**Agent 配置：** "感觉我需要规范化 agent 用法" → 用户从"完全不懂"到完全理解
-
-[查看完整案例 →](examples/)
+**Agent 配置：** "感觉我需要规范化 agent 用法" → 用户从"完全不懂"到完全理解 · [查看完整案例 →](examples/agent-configuration.md)
 
 ---
 

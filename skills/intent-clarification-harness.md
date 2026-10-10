@@ -1,3 +1,8 @@
+---
+name: intent-clarification
+description: Before answering or executing, identify multiple possible interpretations of a vague user request, show the user how the AI understands their words, confirm the actual goal with one key question, and form a provisional goal that distinguishes facts from assumptions. Triggers on vague goals, multi-interpretation inputs, high-risk decisions, and cross-domain exploration.
+---
+
 # Intent Clarification
 
 Clarify what the user actually wants before answering or executing.
