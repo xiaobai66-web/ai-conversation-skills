@@ -1,6 +1,6 @@
 # 🎯 AI 意图技能
 
-> 两个技能，让 AI 在行动前先搞清楚你想要什么。
+> 三个技能，让 AI 在行动前先搞清楚目标，并把最终交付保持干净。
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/xiaobai66-web/ai-intent-skills)
@@ -32,7 +32,7 @@
 
 ---
 
-## 🔧 两个技能
+## 🔧 三个技能
 
 <table>
 <tr>
@@ -77,14 +77,29 @@
 </tr>
 </table>
 
+### 🧼 交付分拣
+
+把聊天过程和最终成品分开，避免旧方向、纠正、临时想法和工作优先级污染答案或提示词。
+
+**核心功能：**
+- 锁定最后确认的目标
+- 区分工作要求、成品内容和过程信息
+- 把抽象优先级翻译成可观察的成品效果
+- 交付前检查旧版本和过程话有没有泄漏
+
+**何时用：** 经过多轮修改的答案、网页、图片提示词、报告和其他最终交付
+
+[查看技能 →](skills/delivery-splitter-codex.md)
+
 ---
 
-## 🤔 为什么分成两个
+## 🤔 为什么分成三个
 
-**分开后各自做好自己的事。**
+**三个技能各自处理一个容易出错的环节。**
 
-**意图澄清：** 用户说话模糊 → 确认暂定目标 → 刚好能确认方向  
-**因果分析：** 目标明确但不懂领域 → 深度因果拆解 + 验证方案 → 完整解释决定性因素
+**意图澄清：** 用户说话模糊 → 确认暂定目标 → 刚好能确认方向<br>
+**因果分析：** 目标明确但不懂领域 → 深度因果拆解 + 验证方案 → 完整解释决定性因素<br>
+**交付分拣：** 对话经过多轮修改 → 筛出最新目标 → 只交付干净成品
 
 ---
 
@@ -124,11 +139,13 @@
 C:\Users\<你的用户名>\.claude\skills\
 ├── 📁 intent-clarification\
 │   └── 📄 SKILL.md          ← 复制自 skills/intent-clarification-codex.md
-└── 📁 causal-factor-analysis\
-    └── 📄 SKILL.md          ← 复制自 skills/causal-factor-analysis-codex.md
+├── 📁 causal-factor-analysis\
+│   └── 📄 SKILL.md          ← 复制自 skills/causal-factor-analysis-codex.md
+└── 📁 delivery-splitter\
+    └── 📄 SKILL.md          ← 复制自 skills/delivery-splitter-codex.md
 ```
 
-**使用方式：** 安装后，AI 会根据输入自动加载对应的 skill。也可以手动调用 `/intent-clarification` 或 `/causal-factor-analysis`。
+**使用方式：** 安装后，AI 会根据输入自动加载对应的 skill。也可以手动调用 `/intent-clarification`、`/causal-factor-analysis` 或 `/delivery-splitter`。
 
 📖 详细安装说明见 [Claude Code 集成指南](docs/harness-integration.md)
 
@@ -158,7 +175,7 @@ C:\Users\<你的用户名>\.claude\skills\
 
 **设计哲学：** 来自真实对话，不是理论 · [完整设计故事 →](docs/design-rationale.md)
 
-**路线图：** v1.0（意图澄清 + 因果拆解）→ v1.1（理解检查 + 动态优先级）→ v2.0（可视化因果图）
+**路线图：** v1.0（意图澄清 + 因果拆解 + 交付分拣）→ v1.1（理解检查 + 动态优先级）→ v2.0（可视化因果图）
 
 **许可：** MIT
 

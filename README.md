@@ -1,6 +1,6 @@
 # 🎯 AI Intent Skills
 
-> Two skills that help AI understand what you actually want before acting.
+> Three skills that help AI understand the goal before acting and keep the final deliverable clean.
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/xiaobai66-web/ai-intent-skills)
@@ -32,7 +32,7 @@ You say **"I want to do AI e-commerce"**. AI might give you a plan immediately, 
 
 ---
 
-## 🔧 Two Skills
+## 🔧 Three Skills
 
 <table>
 <tr>
@@ -77,14 +77,29 @@ Clear goal but unfamiliar domain, need to evaluate viability
 </tr>
 </table>
 
+### 🧼 Delivery Splitter
+
+Separates the conversation process from the finished artifact, so old directions, corrections, temporary ideas, and work priorities do not leak into answers or prompts.
+
+**Core Features:**
+- Locks onto the latest accepted goal
+- Separates work requirements, deliverable content, and process text
+- Translates abstract priorities into observable output
+- Checks for old versions and process leakage before delivery
+
+**Use it when:** Multi-turn revisions produce a final answer, webpage, image prompt, report, or other artifact
+
+[Read the skill →](skills/delivery-splitter-harness.md)
+
 ---
 
-## 🤔 Why Two Skills
+## 🤔 Why Three Skills
 
-**Separating lets each do its job properly.**
+**Each skill handles a different failure point.**
 
-**Intent Clarification:** Vague input → Confirmed provisional goal → Just enough to get direction right  
-**Causal Factor Analysis:** Clear goal but unfamiliar domain → Deep causal breakdown + validation plan → Full explanation of decisive factors
+**Intent Clarification:** Vague input → Confirmed provisional goal → Just enough to get direction right<br>
+**Causal Factor Analysis:** Clear goal but unfamiliar domain → Deep causal breakdown + validation plan → Full explanation of decisive factors<br>
+**Delivery Splitter:** Multi-turn revisions → Latest accepted direction → Clean final deliverable
 
 ---
 
@@ -124,11 +139,13 @@ Copy files to `.claude/skills/` — globally or per project:
 C:\Users\<YourUsername>\.claude\skills\
 ├── 📁 intent-clarification\
 │   └── 📄 SKILL.md          ← copy from skills/intent-clarification-codex.md
-└── 📁 causal-factor-analysis\
-    └── 📄 SKILL.md          ← copy from skills/causal-factor-analysis-codex.md
+├── 📁 causal-factor-analysis\
+│   └── 📄 SKILL.md          ← copy from skills/causal-factor-analysis-codex.md
+└── 📁 delivery-splitter\
+    └── 📄 SKILL.md          ← copy from skills/delivery-splitter-harness.md
 ```
 
-**Usage:** Once installed, AI automatically loads the skill when input matches trigger conditions. You can also manually invoke `/intent-clarification` or `/causal-factor-analysis`.
+**Usage:** Once installed, AI automatically loads the skill when input matches trigger conditions. You can also manually invoke `/intent-clarification`, `/causal-factor-analysis`, or `/delivery-splitter`.
 
 📖 See [Claude Code Integration Guide](docs/harness-integration.md) for details
 
@@ -158,7 +175,7 @@ C:\Users\<YourUsername>\.claude\skills\
 
 **Design Philosophy:** From real conversations, not theory · [Full design story →](docs/design-rationale.md)
 
-**Roadmap:** v1.0 (intent clarification + causal breakdown) → v1.1 (understanding check + dynamic priority) → v2.0 (visual causal graphs)
+**Roadmap:** v1.0 (intent clarification + causal breakdown + delivery splitting) → v1.1 (understanding check + dynamic priority) → v2.0 (visual causal graphs)
 
 **License:** MIT
 
