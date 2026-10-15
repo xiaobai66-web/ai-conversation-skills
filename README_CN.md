@@ -1,11 +1,11 @@
-# 🎯 AI 意图技能
+# 🎯 AI 对话技能
 
 > 三个技能，让 AI 在行动前先搞清楚目标，并把最终交付保持干净。
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/xiaobai66-web/ai-intent-skills)
-[![GitHub Stars](https://img.shields.io/github/stars/xiaobai66-web/ai-intent-skills?style=social)](https://github.com/xiaobai66-web/ai-intent-skills/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/xiaobai66-web/ai-intent-skills?style=social)](https://github.com/xiaobai66-web/ai-intent-skills/network/members)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/xiaobai66-web/ai-conversation-skills)
+[![GitHub Stars](https://img.shields.io/github/stars/xiaobai66-web/ai-conversation-skills?style=social)](https://github.com/xiaobai66-web/ai-conversation-skills/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/xiaobai66-web/ai-conversation-skills?style=social)](https://github.com/xiaobai66-web/ai-conversation-skills/network/members)
 
 **关键词：** AI Agent · 意图识别 · 因果分析 · Prompt Engineering · ChatGPT · Claude · LangChain · 对话系统
 
@@ -181,4 +181,4 @@ C:\Users\<你的用户名>\.claude\skills\
 
 ---
 
-**GitHub:** https://github.com/xiaobai66-web/ai-intent-skills
+**GitHub:** https://github.com/xiaobai66-web/ai-conversation-skills

@@ -1,11 +1,11 @@
-# 🎯 AI Intent Skills
+# 🎯 AI Conversation Skills
 
 > Three skills that help AI understand the goal before acting and keep the final deliverable clean.
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/xiaobai66-web/ai-intent-skills)
-[![GitHub Stars](https://img.shields.io/github/stars/xiaobai66-web/ai-intent-skills?style=social)](https://github.com/xiaobai66-web/ai-intent-skills/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/xiaobai66-web/ai-intent-skills?style=social)](https://github.com/xiaobai66-web/ai-intent-skills/network/members)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/xiaobai66-web/ai-conversation-skills)
+[![GitHub Stars](https://img.shields.io/github/stars/xiaobai66-web/ai-conversation-skills?style=social)](https://github.com/xiaobai66-web/ai-conversation-skills/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/xiaobai66-web/ai-conversation-skills?style=social)](https://github.com/xiaobai66-web/ai-conversation-skills/network/members)
 
 **Keywords:** AI Agent · Intent Recognition · Causal Analysis · Prompt Engineering · ChatGPT · Claude · LangChain · Conversational AI
 
@@ -181,4 +181,4 @@ C:\Users\<YourUsername>\.claude\skills\
 
 ---
 
-**GitHub:** https://github.com/xiaobai66-web/ai-intent-skills
+**GitHub:** https://github.com/xiaobai66-web/ai-conversation-skills

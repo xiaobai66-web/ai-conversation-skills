@@ -1,4 +1,4 @@
-# 对比分析：AI Intent Skills vs 现有方案
+# 对比分析：AI Conversation Skills vs 现有方案
 
 ## 核心差异
 
